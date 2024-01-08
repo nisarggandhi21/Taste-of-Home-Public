@@ -4,7 +4,7 @@ import newRequest from "../../utils/newRequest";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import "./reviews.scss";
 
-const Reviews = ({ itemId }) => { 
+const Reviews = ({ itemId }) => {
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
