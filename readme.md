@@ -72,8 +72,8 @@ A **full-stack web application** connecting **home cooks** with **food enthusias
 ### **Client** Environment Variables
 
 ```bash
-BASEURL = http://localhost:8800/api/
-SUCCESS_URL = http://localhost:5173/success
+VITE_BASEURL = http://localhost:8800/api/
+VITE_SUCCESS_URL = http://localhost:5173/success
 ```
 
 ### **Server** Environment Variables
@@ -83,6 +83,7 @@ MONGO = mongodb+srv://[username]:[password]@cluster
 JWT_KEY = [your-jwt-secret]
 STRIPE_SECRET_KEY = [your-stripe-secret]
 PORT = 8800
+CORS_URL = http://localhost:5173
 ```
 
 ---
@@ -94,7 +95,6 @@ PORT = 8800
    ```bash
    git clone https://github.com/nisarggandhi21/Taste-of-Home-Public.git
    ```
-
 2. **Install dependencies**:
 
    - For **Backend**:
@@ -110,7 +110,6 @@ PORT = 8800
    cd client
    npm install
    ```
-
 3. **Start the servers**:
 
    - For **Backend**:
@@ -124,7 +123,6 @@ PORT = 8800
    ```bash
    npm run dev
    ```
-
 4. Access the application at [http://localhost:5173](http://localhost:5173)
 
 ---
