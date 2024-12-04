@@ -26,20 +26,22 @@ const connect = async () => {
 };
 
 const CORS_URL_MAIN = process.env.CORS_URL;
-app.use(cors({ origin: CORS_URL_MAIN, credentials: true }));
-
-const corsOptions = {
-  origin: CORS_URL_MAIN,
-  optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.use(
+  cors({
+    origin: CORS_URL_MAIN,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
+
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to the API" });
+  res.send("Hello World!");
 });
+
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/items", itemRoutes);
@@ -51,13 +53,16 @@ app.use("/api/reviews", reviewRoutes);
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
   const errorMessage = err.message || "Something went wrong";
-
   res.status(errorStatus).send(errorMessage);
 });
 
-const port = process.env.PORT;
+connect();
 
-app.listen(8800, () => {
-  connect();
-  console.log(`Backend server is running on port ${port}!`);
-});
+// const port = process.env.PORT;
+
+// app.listen(8800, () => {
+//   connect();
+//   console.log(`Backend server is running on port ${port}!`);
+// });
+
+export default app;

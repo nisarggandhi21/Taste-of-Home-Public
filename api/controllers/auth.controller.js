@@ -11,7 +11,25 @@ export const register = async (req, res, next) => {
       password: hash,
     });
     await newUser.save();
-    res.status(201).send("User created");
+
+    // Automatically log in the user after registration
+    const token = jwt.sign(
+      {
+        id: newUser._id,
+        isSeller: newUser.isSeller,
+      },
+      process.env.JWT_KEY
+    );
+
+    const { password, ...info } = newUser._doc;
+    res
+      .cookie("accessToken", token, {
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+      })
+      .status(201)
+      .send(info);
   } catch (error) {
     next(error);
   }
